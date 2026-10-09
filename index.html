@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مباركين بولادة السيدة زينب الكبرى (عليها السلام)</title>
   
-  <!-- خط رقاعي يدوي أصيل -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #f2ebe4;           /* بني فاتح دافئ */
-      --card-bg: #ffffff;           /* أبيض نقّي */
-      --text-main: #121212;         /* أسود متوازن للنصوص */
-      --text-muted: #3a2b22;       /* بني غامق */
-      --primary-brown: #5c3217;     /* بني دافئ رئيسي */
-      --primary-navy: #132238;      /* نيلي كحلي رئيسي */
-      --border-color: #8c5d3b;      /* بني حدودي */
+      --bg-color: #f2ebe4;
+      --card-bg: #ffffff;
+      --text-main: #121212;
+      --text-muted: #3a2b22;
+      --primary-brown: #5c3217;
+      --primary-navy: #132238;
+      --border-color: #8c5d3b;
       --shadow: 0 8px 20px rgba(19, 34, 56, 0.12);
       --font-hand: 'Aref Ruqaa', serif;
       --font-scale: 1;
@@ -26,12 +25,12 @@
     }
 
     [data-theme="dark"] {
-      --bg-color: #0b131e;         /* نيلي داكن */
-      --card-bg: #132238;         /* نيلي للبطاقات */
-      --text-main: #ffffff;       /* أبيض */
-      --text-muted: #d8c4b6;     /* بني فاتح */
-      --primary-brown: #aa683a;   /* بني ناعم */
-      --primary-navy: #386299;    /* نيلي فاتح */
+      --bg-color: #0b131e;
+      --card-bg: #132238;
+      --text-main: #ffffff;
+      --text-muted: #d8c4b6;
+      --primary-brown: #aa683a;
+      --primary-navy: #386299;
       --border-color: #aa683a;
       --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       --pattern-opacity: 0.28;
@@ -59,10 +58,8 @@
 
     #global-pattern-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
       background-repeat: no-repeat;
@@ -392,8 +389,8 @@
       <div class="controls-group">
         <button class="btn-icon" onclick="toggleLanguage()"><span id="lang-btn-text">English</span></button>
         <button class="btn-icon" onclick="toggleTheme()"><span id="theme-btn-text">الوضع الداكن</span></button>
-        <button class="btn-icon" onclick="adjustFontSize(0.1)" title="تكبير الخط">+A</button>
-        <button class="btn-icon" onclick="adjustFontSize(-0.1)" title="تصغير الخط">-A</button>
+        <button class="btn-icon" onclick="adjustFontSize(0.1)">+A</button>
+        <button class="btn-icon" onclick="adjustFontSize(-0.1)">-A</button>
         <button class="btn-icon" onclick="openSettingsModal()"><span data-i18n="settings">الإعدادات</span></button>
       </div>
     </div>
@@ -401,25 +398,25 @@
 
   <main>
 
-    <!-- لوحة تحكم الأدمن لادخال رابط آيكلود أو رابط مباشر -->
+    <!-- لوحة أدمن لإدخال رابط الصورة المباشر من ImgBB أو أي موقع -->
     <div id="admin-panel" class="admin-panel">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <h3 style="color:var(--primary-brown);">لوحة تحكم الأدمن (وضع روابط الآيكلود)</h3>
+        <h3 style="color:var(--primary-brown);">لوحة تحكم الأدمن (تحديث الصور عبر الرابط المباشر)</h3>
         <button class="btn-icon" onclick="logoutAdmin()">خروج</button>
       </div>
       
       <div class="form-group">
-        <label>ضع رابط صورة الواجهة من الآيكلود (iCloud Link) أو أي رابط مباشر:</label>
-        <input type="url" id="icloud-img-url" class="form-control" placeholder="https://..." onchange="updateImageFromLink()">
+        <label>ضع رابط الصورة المباشر (Direct Link):</label>
+        <input type="url" id="link-img-url" class="form-control" placeholder="https://i.ibb.co/..." oninput="updateImageFromLink()">
       </div>
 
       <div class="form-group">
-        <label>ضع رابط النقشة الشفافة من الآيكلود (iCloud Link) أو أي رابط مباشر:</label>
-        <input type="url" id="icloud-pattern-url" class="form-control" placeholder="https://..." onchange="updatePatternFromLink()">
+        <label>ضع رابط النقشة المباشر (Direct Link):</label>
+        <input type="url" id="link-pattern-url" class="form-control" placeholder="https://i.ibb.co/..." oninput="updatePatternFromLink()">
       </div>
     </div>
 
-    <!-- 1. الصفحة الرئيسية -->
+    <!-- 1. الرئيسية -->
     <div id="section-home" class="page-section active">
       <div class="banner-title">
         <div class="pattern-overlay-layer custom-pattern"></div>
@@ -433,7 +430,6 @@
       <div class="image-container-card">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative dynamic-image-wrapper">
-          <!-- يمكن تغيير الرابط المباشر الافتراضي أدناه بأي رابط iCloud لديك -->
           <img id="main-display-image" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1000&q=80" alt="ولادة السيدة زينب">
         </div>
       </div>
@@ -459,7 +455,7 @@
       </div>
     </div>
 
-    <!-- 2. صفحة السيرة العطرة -->
+    <!-- 2. السيرة -->
     <div id="section-biography" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -478,7 +474,7 @@
       </div>
     </div>
 
-    <!-- 3. صفحة معلومات عنها والمعلومة المتجددة -->
+    <!-- 3. المعلومات -->
     <div id="section-info-list" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -700,17 +696,15 @@
       alert(currentLang === 'ar' ? 'تم الخروج من حساب الأدمن.' : 'Logged out from Admin.');
     }
 
-    // تحديث رابط صورة الواجهة مباشرة من الآيكلود أو غيره
     function updateImageFromLink() {
-      const url = document.getElementById('icloud-img-url').value;
+      const url = document.getElementById('link-img-url').value;
       if(url) {
         document.getElementById('main-display-image').src = url;
       }
     }
 
-    // تحديث رابط النقشة الشفافة مباشرة من الآيكلود أو غيره
     function updatePatternFromLink() {
-      const url = document.getElementById('icloud-pattern-url').value;
+      const url = document.getElementById('link-pattern-url').value;
       if(url) {
         document.getElementById('global-pattern-bg').style.backgroundImage = `url('${url}')`;
         document.querySelectorAll('.custom-pattern').forEach(el => {
