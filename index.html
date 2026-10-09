@@ -5,41 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مباركين بولادة السيدة زينب الكبرى (عليها السلام)</title>
   
-  <!-- خطوط عربية يدية ورسومية متناسقة -->
+  <!-- خط رقاعي يدوي أصيل -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marhey:wght@400;700&family=Reem+Kufi:wght@500;700&family=Changa:wght@500;700&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome للإيقونات -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #f4ede6;
-      --card-bg: rgba(255, 255, 255, 0.94);
-      --text-main: #2b1a10;
-      --text-muted: #4a382b;
-      --primary-brown: #5c3015;
-      --primary-blue: #1b2838;
-      --accent-blue: #2c435e;
-      --border-color: #d1bead;
-      --shadow: 0 10px 25px -5px rgba(27, 40, 56, 0.15);
-      --font-hand: 'Marhey', 'Reem Kufi', cursive, sans-serif;
-      --font-body: 'Reem Kufi', 'Changa', sans-serif;
+      --bg-color: #f2ebe4;           /* بني فاتح دافئ */
+      --card-bg: #ffffff;           /* أبيض نقّي */
+      --text-main: #121212;         /* أسود متوازن للنصوص */
+      --text-muted: #3a2b22;       /* بني غامق */
+      --primary-brown: #5c3217;     /* بني دافئ رئيسي */
+      --primary-navy: #132238;      /* نيلي كحلي رئيسي */
+      --border-color: #8c5d3b;      /* بني حدودي */
+      --shadow: 0 8px 20px rgba(19, 34, 56, 0.12);
+      --font-hand: 'Aref Ruqaa', serif;
       --font-scale: 1;
       --pattern-opacity: 0.18;
     }
 
     [data-theme="dark"] {
-      --bg-color: #0f172a;
-      --card-bg: rgba(27, 40, 56, 0.94);
-      --text-main: #f1f5f9;
-      --text-muted: #cbd5e1;
-      --primary-brown: #a8653b;
-      --primary-blue: #3b82f6;
-      --accent-blue: #60a5fa;
-      --border-color: #334155;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      --bg-color: #0b131e;         /* نيلي داكن */
+      --card-bg: #132238;         /* نيلي للبطاقات */
+      --text-main: #ffffff;       /* أبيض */
+      --text-muted: #d8c4b6;     /* بني فاتح */
+      --primary-brown: #aa683a;   /* بني ناعم */
+      --primary-navy: #386299;    /* نيلي فاتح */
+      --border-color: #aa683a;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       --pattern-opacity: 0.28;
     }
 
@@ -47,14 +41,14 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: var(--font-hand) !important;
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      font-family: var(--font-body);
-      font-size: calc(18px * var(--font-scale));
+      font-size: calc(19px * var(--font-scale));
       line-height: 1.8;
       min-height: 100vh;
       display: flex;
@@ -63,7 +57,7 @@
       overflow-x: hidden;
     }
 
-    /* خلفية النقشات العامة تغطي الشاشة دون تكرار */
+    /* خلفية النقشات تغطي بحجم كامل بدون تكرار */
     #global-pattern-bg {
       position: fixed;
       top: 0;
@@ -101,27 +95,31 @@
     .controls-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .btn-icon {
       background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 8px 14px;
+      border: 2px solid var(--primary-navy);
+      color: var(--primary-navy);
+      padding: 6px 14px;
       border-radius: 12px;
       cursor: pointer;
-      font-family: var(--font-hand);
-      font-size: 0.85em;
+      font-size: 0.9em;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+    }
+
+    [data-theme="dark"] .btn-icon {
+      border-color: var(--primary-brown);
+      color: var(--text-main);
     }
 
     .btn-icon:hover {
-      background: var(--primary-brown);
-      color: #fff;
+      background: var(--primary-navy);
+      color: #ffffff;
     }
 
     main {
@@ -152,10 +150,10 @@
     }
 
     .banner-title {
-      font-family: var(--font-hand);
       text-align: center;
       color: var(--primary-brown);
-      font-size: calc(1.8em * var(--font-scale));
+      font-size: calc(2em * var(--font-scale));
+      font-weight: bold;
       padding: 20px;
       background: var(--card-bg);
       border-radius: 20px;
@@ -215,12 +213,11 @@
     }
 
     .nav-card-btn:hover {
-      border-color: var(--primary-brown);
+      border-color: var(--primary-navy);
       transform: translateY(-2px);
     }
 
     .nav-card-btn h3 {
-      font-family: var(--font-hand);
       color: var(--primary-brown);
       font-size: 1.4em;
     }
@@ -245,29 +242,24 @@
     }
 
     .info-header h4 {
-      font-family: var(--font-hand);
-      color: var(--primary-blue);
+      color: var(--primary-navy);
       font-size: 1.3em;
     }
 
     .btn-refresh {
       background: var(--primary-brown);
-      color: #fff;
+      color: #ffffff;
       border: none;
       padding: 8px 16px;
       border-radius: 10px;
       cursor: pointer;
-      font-family: var(--font-hand);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .info-content-title {
-      font-family: var(--font-hand);
       color: var(--primary-brown);
       font-size: 1.3em;
       margin-bottom: 5px;
+      font-weight: bold;
     }
 
     .info-source {
@@ -279,14 +271,12 @@
     .back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--primary-blue);
-      color: #fff;
+      background: var(--primary-navy);
+      color: #ffffff;
       border: none;
       padding: 10px 20px;
       border-radius: 12px;
       cursor: pointer;
-      font-family: var(--font-hand);
       margin-bottom: 15px;
     }
 
@@ -307,9 +297,9 @@
     }
 
     .list-item-title {
-      font-family: var(--font-hand);
       color: var(--primary-brown);
       font-size: 1.25em;
+      font-weight: bold;
     }
 
     .admin-panel {
@@ -342,7 +332,6 @@
       border-radius: 8px;
       background: var(--bg-color);
       color: var(--text-main);
-      font-family: var(--font-body);
     }
 
     .modal-overlay {
@@ -371,25 +360,10 @@
     }
 
     .modal-title {
-      font-family: var(--font-hand);
       color: var(--primary-brown);
       margin-bottom: 15px;
     }
 
-    footer {
-      position: relative;
-      z-index: 2;
-      background: var(--card-bg);
-      border-top: 2px solid var(--border-color);
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
-      font-family: var(--font-hand);
-      color: var(--text-muted);
-      font-size: 0.9em;
-    }
-
-    /* طبقة النقشة الشفافة مغطية بحجم الشكل بالكامل دون تكرار */
     .pattern-overlay-layer {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -411,18 +385,18 @@
 
   <div id="global-pattern-bg"></div>
 
-  <!-- الشريط العلوي -->
+  <!-- الشريط العلوي (خالي تماماً من الأيقونات) -->
   <header>
     <div class="header-container">
-      <div style="font-family: var(--font-hand); font-size: 1.2em; color: var(--primary-brown);">
-        <i class="fa-solid fa-kaaba"></i> <span data-i18n="appTitle">السيدة زينب (ع)</span>
+      <div style="font-size: 1.2em; color: var(--primary-brown); font-weight: bold;">
+        <span data-i18n="appTitle">السيدة زينب (ع)</span>
       </div>
       <div class="controls-group">
-        <button class="btn-icon" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> <span id="lang-btn-text">English</span></button>
-        <button class="btn-icon" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> <span id="theme-btn-text">الوضع الداكن</span></button>
-        <button class="btn-icon" onclick="adjustFontSize(0.1)"><i class="fa-solid fa-font"></i> +A</button>
-        <button class="btn-icon" onclick="adjustFontSize(-0.1)"><i class="fa-solid fa-font"></i> -A</button>
-        <button class="btn-icon" onclick="openSettingsModal()"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">الإعدادات</span></button>
+        <button class="btn-icon" onclick="toggleLanguage()"><span id="lang-btn-text">English</span></button>
+        <button class="btn-icon" onclick="toggleTheme()"><span id="theme-btn-text">الوضع الداكن</span></button>
+        <button class="btn-icon" onclick="adjustFontSize(0.1)" title="تكبير الخط">+A</button>
+        <button class="btn-icon" onclick="adjustFontSize(-0.1)" title="تصغير الخط">-A</button>
+        <button class="btn-icon" onclick="openSettingsModal()"><span data-i18n="settings">الإعدادات</span></button>
       </div>
     </div>
   </header>
@@ -432,17 +406,17 @@
     <!-- لوحة تحكم الأدمن -->
     <div id="admin-panel" class="admin-panel">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <h3 style="font-family: var(--font-hand); color:var(--primary-brown);"><i class="fa-solid fa-user-shield"></i> لوحة تحكم الأدمن</h3>
-        <button class="btn-icon" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+        <h3 style="color:var(--primary-brown);">لوحة تحكم الأدمن</h3>
+        <button class="btn-icon" onclick="logoutAdmin()">خروج</button>
       </div>
       
       <div class="form-group">
-        <label><i class="fa-solid fa-image"></i> تغيير صورة الواجهة (رفع صورة):</label>
+        <label>تغيير صورة الواجهة (رفع صورة):</label>
         <input type="file" id="main-image-file" accept="image/*" class="form-control" onchange="uploadMainImage(event)">
       </div>
 
       <div class="form-group">
-        <label><i class="fa-solid fa-brush"></i> رفع نقشة شفافة تغطي الأشكال بحجم كامل (تتوسع لتملأ الشكل):</label>
+        <label>رفع نقشة شفافة تغطي الأشكال بحجم كامل (تتوسع لتملأ الشكل):</label>
         <input type="file" id="pattern-image-file" accept="image/*" class="form-control" onchange="uploadPatternImage(event)">
       </div>
     </div>
@@ -459,7 +433,6 @@
 
       <br>
 
-      <!-- مكان الصورة التكيفي -->
       <div class="image-container-card">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative dynamic-image-wrapper">
@@ -469,12 +442,10 @@
 
       <br>
 
-      <!-- المستطيلين للانتفال للصفحات الجديدة -->
       <div class="nav-buttons-grid">
         <div class="nav-card-btn" onclick="showSection('section-biography')">
           <div class="pattern-overlay-layer custom-pattern"></div>
           <div class="card-content-relative">
-            <i class="fa-solid fa-book-open" style="font-size: 2em; color: var(--primary-brown); margin-bottom: 8px;"></i>
             <h3 data-i18n="bioBtnTitle">سيرتها العطرة</h3>
             <p style="font-size: 0.9em; color: var(--text-muted);" data-i18n="bioBtnDesc">قراءة السيرة المباركة والمصادر التاريخية</p>
           </div>
@@ -483,7 +454,6 @@
         <div class="nav-card-btn" onclick="showSection('section-info-list')">
           <div class="pattern-overlay-layer custom-pattern"></div>
           <div class="card-content-relative">
-            <i class="fa-solid fa-list-check" style="font-size: 2em; color: var(--primary-blue); margin-bottom: 8px;"></i>
             <h3 data-i18n="infoBtnTitle">معلومات عنها</h3>
             <p style="font-size: 0.9em; color: var(--text-muted);" data-i18n="infoBtnDesc">تصفح الألقاب والتحديث التفاعلي للمعلومات</p>
           </div>
@@ -494,39 +464,35 @@
 
     <!-- 2. صفحة السيرة العطرة -->
     <div id="section-biography" class="page-section">
-      <button class="back-btn" onclick="showSection('section-home')"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="backHome">العودة للرئيسية</span></button>
+      <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
       <div class="info-quick-card">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative">
-          <h2 style="font-family: var(--font-hand); color: var(--primary-brown); margin-bottom: 15px;" data-i18n="bioFullTitle">السيرة العطرة للسيدة زينب الكبرى (عليها السلام)</h2>
+          <h2 style="color: var(--primary-brown); margin-bottom: 15px;" data-i18n="bioFullTitle">السيرة العطرة للسيدة زينب الكبرى (عليها السلام)</h2>
           
-          <div style="display: flex; flex-direction: column; gap: 15px; text-align: justify;" id="bio-text-container">
-            <!-- نصوص السيرة تتولد عبر JS مع الدعم الكامل للترجمة -->
-          </div>
+          <div style="display: flex; flex-direction: column; gap: 15px; text-align: justify;" id="bio-text-container"></div>
 
           <hr style="margin: 20px 0; border-color: var(--border-color);">
 
-          <h4 style="font-family: var(--font-hand); color: var(--primary-blue);" data-i18n="sourcesTitle">المصادر التاريخية:</h4>
-          <ul style="margin-right: 20px; margin-top: 10px; color: var(--text-muted);" id="bio-sources-container">
-            <!-- المصادر تتولد عبر JS -->
-          </ul>
+          <h4 style="color: var(--primary-navy);" data-i18n="sourcesTitle">المصادر التاريخية:</h4>
+          <ul style="margin-right: 20px; margin-top: 10px; color: var(--text-muted);" id="bio-sources-container"></ul>
         </div>
       </div>
     </div>
 
-    <!-- 3. صفحة معلومات عنها ومعلومات تتحدث -->
+    <!-- 3. صفحة معلومات عنها والمعلومة المتجددة -->
     <div id="section-info-list" class="page-section">
-      <button class="back-btn" onclick="showSection('section-home')"><i class="fa-solid fa-arrow-right"></i> <span data-i18n="backHome">العودة للرئيسية</span></button>
+      <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
-      <!-- النافذة الخاصة بالمعلومة التفاعلية المتجددة -->
+      <!-- النافذة الخاصة بالمعلومة المتجددة -->
       <div class="info-quick-card" style="margin-bottom: 25px;">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative">
           <div class="info-header">
-            <h4><i class="fa-solid fa-lightbulb"></i> <span data-i18n="quickInfoTitle">معلومة متجددة</span></h4>
+            <h4><span data-i18n="quickInfoTitle">معلومة متجددة</span></h4>
             <button class="btn-refresh" onclick="nextRandomInfo()">
-              <i class="fa-solid fa-rotate"></i> <span data-i18n="refreshBtn">تحديث المعلومة</span>
+              <span data-i18n="refreshBtn">تحديث المعلومة</span>
             </button>
           </div>
           <div id="quick-info-title" class="info-content-title">العقيلة</div>
@@ -535,19 +501,16 @@
         </div>
       </div>
 
-      <h3 style="font-family: var(--font-hand); color: var(--primary-brown); margin-bottom: 15px;" data-i18n="infoListFullTitle">كافة ألقاب ومعلومات السيدة زينب (عليها السلام)</h3>
+      <h3 style="color: var(--primary-brown); margin-bottom: 15px;" data-i18n="infoListFullTitle">كافة ألقاب ومعلومات السيدة زينب (عليها السلام)</h3>
       
-      <div id="full-info-container" class="full-list">
-        <!-- توليد البطاقات عبر JS -->
-      </div>
+      <div id="full-info-container" class="full-list"></div>
     </div>
 
   </main>
 
-  <!-- نافذة الإعدادات -->
   <div id="modal-settings" class="modal-overlay">
     <div class="modal-box">
-      <h3 class="modal-title"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">الإعدادات</span></h3>
+      <h3 class="modal-title"><span data-i18n="settings">الإعدادات</span></h3>
       
       <div class="form-group">
         <label data-i18n="adminPassLabel">الدخول كأدمن (أدخل الرمز):</label>
@@ -561,12 +524,7 @@
     </div>
   </div>
 
-  <footer>
-    جميع الحقوق محفوظة لحسن محمد ناصر ©
-  </footer>
-
   <script>
-    // النصوص الكاملة بالعربية والإنكليزية للسيرة والمصادر والمعلومات
     const database = {
       ar: {
         bioParagraphs: [
@@ -661,7 +619,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // عرض وتحديث السيرة العطرة
     function renderBiography() {
       const pContainer = document.getElementById('bio-text-container');
       const sContainer = document.getElementById('bio-sources-container');
@@ -673,7 +630,6 @@
       sContainer.innerHTML = sData.map(s => `<li>${s}</li>`).join('');
     }
 
-    // تحديث المعلومة المتجددة داخل نافذتها
     function nextRandomInfo() {
       const list = database[currentLang].infoList;
       currentInfoIndex = (currentInfoIndex + 1) % list.length;
@@ -687,7 +643,6 @@
       document.getElementById('quick-info-source').innerText = (currentLang === 'ar' ? "المصدر: " : "Source: ") + item.source;
     }
 
-    // عرض قائمة المعلومات بالكامل
     function renderFullInfoList() {
       const container = document.getElementById('full-info-container');
       const list = database[currentLang].infoList;
@@ -799,7 +754,6 @@
       loadSavedPatternToNewElements();
     }
 
-    // التبديل بين اللغات للواجهة بالكامل
     function toggleLanguage() {
       if (currentLang === 'ar') {
         currentLang = 'en';
