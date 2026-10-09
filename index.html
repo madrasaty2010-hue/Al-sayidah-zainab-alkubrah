@@ -57,7 +57,6 @@
       overflow-x: hidden;
     }
 
-    /* خلفية النقشات تغطي بحجم كامل بدون تكرار */
     #global-pattern-bg {
       position: fixed;
       top: 0;
@@ -379,13 +378,20 @@
       position: relative;
       z-index: 2;
     }
+
+    /* مؤشر التحميل */
+    #loading-indicator {
+      display: none;
+      color: var(--primary-brown);
+      font-weight: bold;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
 
   <div id="global-pattern-bg"></div>
 
-  <!-- الشريط العلوي (خالي تماماً من الأيقونات) -->
   <header>
     <div class="header-container">
       <div style="font-size: 1.2em; color: var(--primary-brown); font-weight: bold;">
@@ -406,24 +412,25 @@
     <!-- لوحة تحكم الأدمن -->
     <div id="admin-panel" class="admin-panel">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <h3 style="color:var(--primary-brown);">لوحة تحكم الأدمن</h3>
+        <h3 style="color:var(--primary-brown);">لوحة تحكم الأدمن (سحابية لجميع الأجهزة)</h3>
         <button class="btn-icon" onclick="logoutAdmin()">خروج</button>
       </div>
       
       <div class="form-group">
-        <label>تغيير صورة الواجهة (رفع صورة):</label>
+        <label>تغيير صورة الواجهة (رفع صورة لجميع الزوار):</label>
         <input type="file" id="main-image-file" accept="image/*" class="form-control" onchange="uploadMainImage(event)">
       </div>
 
       <div class="form-group">
-        <label>رفع نقشة شفافة تغطي الأشكال بحجم كامل (تتوسع لتملأ الشكل):</label>
+        <label>رفع نقشة شفافة تغطي الأشكال بحجم كامل (لجميع الزوار):</label>
         <input type="file" id="pattern-image-file" accept="image/*" class="form-control" onchange="uploadPatternImage(event)">
       </div>
+
+      <div id="loading-indicator">جاري رفع وتحديث البيانات في السحابة لجميع الزوار...</div>
     </div>
 
     <!-- 1. الصفحة الرئيسية -->
     <div id="section-home" class="page-section active">
-      
       <div class="banner-title">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative" data-i18n="bannerTitle">
@@ -459,7 +466,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- 2. صفحة السيرة العطرة -->
@@ -485,7 +491,6 @@
     <div id="section-info-list" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
-      <!-- النافذة الخاصة بالمعلومة المتجددة -->
       <div class="info-quick-card" style="margin-bottom: 25px;">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative">
@@ -525,6 +530,15 @@
   </div>
 
   <script>
+    // الإعدادات السحابية للحفظ العام لجميع المستخدمين عبر JSONBin
+    const CLOUD_API_URL = "https://api.jsonbin.io/v3/b/65cb887a266cfc3f08204689"; // خادم سحابي عام
+    const CLOUD_API_KEY = "$2a$10$8.7zRjT/CgS8I4OQ2D02e.cExP3XkC4h/oH2Z6oJjD8F4Q8M4E6i6";
+
+    let currentCloudData = {
+      mainImg: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1000&q=80",
+      patternImg: ""
+    };
+
     const database = {
       ar: {
         bioParagraphs: [
@@ -602,7 +616,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       renderAllContent();
-      loadSavedAssets();
+      fetchCloudAssets(); // تحميل الصور والنقشات العامة التي رفعها الأدمن
     });
 
     function renderAllContent() {
@@ -661,7 +675,9 @@
         `;
         container.appendChild(card);
       });
-      loadSavedPatternToNewElements();
+      if(currentCloudData.patternImg) {
+        applyPatternImage(currentCloudData.patternImg);
+      }
     }
 
     function toggleTheme() {
@@ -706,14 +722,58 @@
       alert(currentLang === 'ar' ? 'تم الخروج من حساب الأدمن.' : 'Logged out from Admin.');
     }
 
+    // جلب الصور والنقشات العامة للسحابة لتظهر لجميع الزوار
+    async function fetchCloudAssets() {
+      try {
+        const response = await fetch(CLOUD_API_URL + "/latest", {
+          headers: { "X-Master-Key": CLOUD_API_KEY }
+        });
+        if (response.ok) {
+          const resData = await response.json();
+          if (resData.record) {
+            currentCloudData = resData.record;
+            if (currentCloudData.mainImg) {
+              document.getElementById('main-display-image').src = currentCloudData.mainImg;
+            }
+            if (currentCloudData.patternImg) {
+              applyPatternImage(currentCloudData.patternImg);
+            }
+          }
+        }
+      } catch (err) {
+        console.log("Cloud fetch fallback");
+      }
+    }
+
+    // حفظ الصور والنقشات في السحابة فوراً من قبل الأدمن
+    async function saveCloudAssets() {
+      document.getElementById('loading-indicator').style.display = 'block';
+      try {
+        await fetch(CLOUD_API_URL, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': CLOUD_API_KEY
+          },
+          body: JSON.stringify(currentCloudData)
+        });
+        alert(currentLang === 'ar' ? 'تم حفظ وتحديث الصورة لجميع الزوار والمصادر بنجاح!' : 'Assets updated globally for all users!');
+      } catch (err) {
+        alert(currentLang === 'ar' ? 'حدث خطأ في الاتصال بالسحابة' : 'Cloud sync error');
+      } finally {
+        document.getElementById('loading-indicator').style.display = 'none';
+      }
+    }
+
     function uploadMainImage(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = async function(e) {
           const imgUrl = e.target.result;
           document.getElementById('main-display-image').src = imgUrl;
-          localStorage.setItem('custom_main_img', imgUrl);
+          currentCloudData.mainImg = imgUrl;
+          await saveCloudAssets(); // رفع وسحابة مباشرة للجميع
         };
         reader.readAsDataURL(file);
       }
@@ -723,10 +783,11 @@
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = async function(e) {
           const patternUrl = e.target.result;
           applyPatternImage(patternUrl);
-          localStorage.setItem('custom_pattern_img', patternUrl);
+          currentCloudData.patternImg = patternUrl;
+          await saveCloudAssets(); // رفع وسحابة مباشرة للجميع
         };
         reader.readAsDataURL(file);
       }
@@ -737,21 +798,6 @@
       document.querySelectorAll('.custom-pattern').forEach(el => {
         el.style.backgroundImage = `url('${url}')`;
       });
-    }
-
-    function loadSavedPatternToNewElements() {
-      const savedPatternImg = localStorage.getItem('custom_pattern_img');
-      if (savedPatternImg) {
-        applyPatternImage(savedPatternImg);
-      }
-    }
-
-    function loadSavedAssets() {
-      const savedMainImg = localStorage.getItem('custom_main_img');
-      if (savedMainImg) {
-        document.getElementById('main-display-image').src = savedMainImg;
-      }
-      loadSavedPatternToNewElements();
     }
 
     function toggleLanguage() {
