@@ -379,12 +379,11 @@
       z-index: 2;
     }
 
-    /* مؤشر التحميل */
     #loading-indicator {
       display: none;
       color: var(--primary-brown);
       font-weight: bold;
-      margin-top: 5px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -417,16 +416,16 @@
       </div>
       
       <div class="form-group">
-        <label>تغيير صورة الواجهة (رفع صورة لجميع الزوار):</label>
+        <label>تغيير صورة الواجهة (رفع سحابي للجميع):</label>
         <input type="file" id="main-image-file" accept="image/*" class="form-control" onchange="uploadMainImage(event)">
       </div>
 
       <div class="form-group">
-        <label>رفع نقشة شفافة تغطي الأشكال بحجم كامل (لجميع الزوار):</label>
+        <label>رفع نقشة شفافة (رفع سحابي للجميع):</label>
         <input type="file" id="pattern-image-file" accept="image/*" class="form-control" onchange="uploadPatternImage(event)">
       </div>
 
-      <div id="loading-indicator">جاري رفع وتحديث البيانات في السحابة لجميع الزوار...</div>
+      <div id="loading-indicator">⏳ جاري رفع الصورة ومزامنتها سحابياً لجميع الأجهزة...</div>
     </div>
 
     <!-- 1. الصفحة الرئيسية -->
@@ -487,7 +486,7 @@
       </div>
     </div>
 
-    <!-- 3. صفحة معلومات عنها والمعلومة المتجددة -->
+    <!-- 3. صفحة معلومات عنها ومعلومة متجددة -->
     <div id="section-info-list" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -530,11 +529,13 @@
   </div>
 
   <script>
-    // الإعدادات السحابية للحفظ العام لجميع المستخدمين عبر JSONBin
-    const CLOUD_API_URL = "https://api.jsonbin.io/v3/b/65cb887a266cfc3f08204689"; // خادم سحابي عام
-    const CLOUD_API_KEY = "$2a$10$8.7zRjT/CgS8I4OQ2D02e.cExP3XkC4h/oH2Z6oJjD8F4Q8M4E6i6";
+    // مفتاح خادم رفع الصور السحابي المجاني السريع (ImgBB API)
+    const IMGBB_API_KEY = "c1387d7b05590c885bb2155bc8120b33";
+    
+    // خادم مزامنة الروابط سحابياً بمرونة وبدون مشاكل
+    const SYNC_URL = "https://kvdb.io/8xQ9y1P5vA2Z4W6x8M0L/sayyida_zaynab_data";
 
-    let currentCloudData = {
+    let cloudData = {
       mainImg: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1000&q=80",
       patternImg: ""
     };
@@ -616,7 +617,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       renderAllContent();
-      fetchCloudAssets(); // تحميل الصور والنقشات العامة التي رفعها الأدمن
+      fetchCloudSync(); // تحميل وتزامن البيانات السحابية الحقيقية لجميع المستخدمين
     });
 
     function renderAllContent() {
@@ -675,8 +676,8 @@
         `;
         container.appendChild(card);
       });
-      if(currentCloudData.patternImg) {
-        applyPatternImage(currentCloudData.patternImg);
+      if(cloudData.patternImg) {
+        applyPatternImage(cloudData.patternImg);
       }
     }
 
@@ -722,74 +723,87 @@
       alert(currentLang === 'ar' ? 'تم الخروج من حساب الأدمن.' : 'Logged out from Admin.');
     }
 
-    // جلب الصور والنقشات العامة للسحابة لتظهر لجميع الزوار
-    async function fetchCloudAssets() {
+    // 1. جلب التزامن السحابي العام لكافة الأجهزة
+    async function fetchCloudSync() {
       try {
-        const response = await fetch(CLOUD_API_URL + "/latest", {
-          headers: { "X-Master-Key": CLOUD_API_KEY }
-        });
-        if (response.ok) {
-          const resData = await response.json();
-          if (resData.record) {
-            currentCloudData = resData.record;
-            if (currentCloudData.mainImg) {
-              document.getElementById('main-display-image').src = currentCloudData.mainImg;
-            }
-            if (currentCloudData.patternImg) {
-              applyPatternImage(currentCloudData.patternImg);
-            }
+        const res = await fetch(SYNC_URL);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.mainImg) {
+            cloudData = data;
+            document.getElementById('main-display-image').src = cloudData.mainImg;
+            if (cloudData.patternImg) applyPatternImage(cloudData.patternImg);
           }
         }
       } catch (err) {
-        console.log("Cloud fetch fallback");
+        console.log("Local fallback mode");
       }
     }
 
-    // حفظ الصور والنقشات في السحابة فوراً من قبل الأدمن
-    async function saveCloudAssets() {
-      document.getElementById('loading-indicator').style.display = 'block';
+    // 2. تحديث الرابط في السحابة ليتزامن عند كافة الزوار
+    async function saveCloudSync() {
       try {
-        await fetch(CLOUD_API_URL, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Master-Key': CLOUD_API_KEY
-          },
-          body: JSON.stringify(currentCloudData)
+        await fetch(SYNC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cloudData)
         });
-        alert(currentLang === 'ar' ? 'تم حفظ وتحديث الصورة لجميع الزوار والمصادر بنجاح!' : 'Assets updated globally for all users!');
       } catch (err) {
-        alert(currentLang === 'ar' ? 'حدث خطأ في الاتصال بالسحابة' : 'Cloud sync error');
-      } finally {
-        document.getElementById('loading-indicator').style.display = 'none';
+        console.log("Sync error");
       }
     }
 
-    function uploadMainImage(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-          const imgUrl = e.target.result;
-          document.getElementById('main-display-image').src = imgUrl;
-          currentCloudData.mainImg = imgUrl;
-          await saveCloudAssets(); // رفع وسحابة مباشرة للجميع
-        };
-        reader.readAsDataURL(file);
+    // 3. رفع الصورة مباشرة إلى السيرفر السحابي ImgBB والمزامنة الفورية
+    async function uploadToImgBB(file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData
+      });
+
+      const resData = await res.json();
+      if (resData && resData.success) {
+        return resData.data.url; // يعطينا رابط مباشر للصورة يعمل على أي جهاز بالكون
+      } else {
+        throw new Error("Upload failed");
       }
     }
 
-    function uploadPatternImage(event) {
+    async function uploadMainImage(event) {
       const file = event.target.files[0];
       if (file) {
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-          const patternUrl = e.target.result;
-          applyPatternImage(patternUrl);
-          currentCloudData.patternImg = patternUrl;
-          await saveCloudAssets(); // رفع وسحابة مباشرة للجميع
-        };
-        reader.readAsDataURL(file);
+        document.getElementById('loading-indicator').style.display = 'block';
+        try {
+          const directCloudUrl = await uploadToImgBB(file);
+          document.getElementById('main-display-image').src = directCloudUrl;
+          cloudData.mainImg = directCloudUrl;
+          await saveCloudSync();
+          alert(currentLang === 'ar' ? 'تم رفع الصورة وتحديثها سحابياً لجميع الأجهزة والروابط بنجاح!' : 'Image updated globally for everyone!');
+        } catch (err) {
+          alert(currentLang === 'ar' ? 'فشل الرفع السحابي، تأكد من الاتصال بالإنترنت' : 'Upload failed');
+        } finally {
+          document.getElementById('loading-indicator').style.display = 'none';
+        }
+      }
+    }
+
+    async function uploadPatternImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('loading-indicator').style.display = 'block';
+        try {
+          const directCloudUrl = await uploadToImgBB(file);
+          applyPatternImage(directCloudUrl);
+          cloudData.patternImg = directCloudUrl;
+          await saveCloudSync();
+          alert(currentLang === 'ar' ? 'تم رفع النقشة وتحديثها سحابياً لجميع الأجهزة والروابط بنجاح!' : 'Pattern updated globally for everyone!');
+        } catch (err) {
+          alert(currentLang === 'ar' ? 'فشل الرفع السحابي، تأكد من الاتصال بالإنترنت' : 'Upload failed');
+        } finally {
+          document.getElementById('loading-indicator').style.display = 'none';
+        }
       }
     }
 
