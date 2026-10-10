@@ -102,7 +102,6 @@
       font-size: 1.3em;
       color: var(--primary-brown);
       font-weight: bold;
-      letter-spacing: 0.5px;
     }
 
     .controls-group {
@@ -124,7 +123,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     [data-theme="dark"] .btn-icon {
@@ -144,7 +142,7 @@
       flex: 1;
       max-width: 900px;
       width: 100%;
-      margin: 30px auto;
+      margin: 25px auto;
       padding: 0 20px;
       display: flex;
       flex-direction: column;
@@ -165,13 +163,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* كارت العنونة الرئيسي بطابع ضربات فرشاة ديكورية */
     .banner-title {
       text-align: center;
       color: var(--primary-brown);
       font-size: calc(2.2em * var(--font-scale));
       font-weight: bold;
-      padding: 35px 25px;
+      padding: 30px 20px;
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       border-radius: 24px;
@@ -181,27 +178,22 @@
       overflow: hidden;
     }
 
-    .banner-title::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background: linear-gradient(135deg, rgba(107, 62, 30, 0.06), rgba(24, 43, 72, 0.06));
-      pointer-events: none;
-    }
-
-    .nav-buttons-grid {
+    /* شبكة المربعات الرئيسية */
+    .nav-squares-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
       margin-top: 10px;
     }
 
-    .nav-card-btn {
+    /* بطاقة مربعة الشكل بالكامل */
+    .square-card-btn {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       border: 2px solid var(--card-border);
-      border-radius: 20px;
-      padding: 30px 20px;
+      border-radius: 24px;
+      aspect-ratio: 1 / 1;
+      padding: 20px;
       text-align: center;
       cursor: pointer;
       box-shadow: var(--shadow);
@@ -209,29 +201,30 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 12px;
       position: relative;
       overflow: hidden;
     }
 
-    .nav-card-btn::after {
+    .square-card-btn::after {
       content: '';
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 4px;
+      height: 6px;
       background: linear-gradient(90deg, var(--primary-brown), var(--primary-navy));
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
-    .nav-card-btn:hover {
+    .square-card-btn:hover {
       border-color: var(--primary-navy);
       transform: translateY(-4px);
     }
 
-    .nav-card-btn h3 {
+    .square-card-btn h3 {
       color: var(--primary-brown);
-      font-size: 1.5em;
+      font-size: 1.6em;
     }
 
     .info-quick-card {
@@ -239,7 +232,7 @@
       backdrop-filter: blur(10px);
       border-radius: 24px;
       border: 2px solid var(--card-border);
-      padding: 30px;
+      padding: 25px 30px;
       box-shadow: var(--shadow);
       position: relative;
     }
@@ -248,14 +241,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border-bottom: 2px solid var(--card-border);
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
 
     .info-header h4 {
       color: var(--primary-navy);
-      font-size: 1.4em;
+      font-size: 1.35em;
     }
 
     .btn-refresh {
@@ -276,7 +269,7 @@
 
     .info-content-title {
       color: var(--primary-brown);
-      font-size: 1.4em;
+      font-size: 1.35em;
       margin-bottom: 8px;
       font-weight: bold;
     }
@@ -284,7 +277,28 @@
     .info-source {
       font-size: 0.88em;
       color: var(--text-muted);
-      margin-top: 12px;
+      margin-top: 10px;
+    }
+
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-brown);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 0.95em;
+      box-shadow: 0 4px 12px rgba(107, 62, 30, 0.2);
+    }
+
+    .read-more-btn:hover {
+      background: var(--primary-navy);
+      transform: translateY(-2px);
     }
 
     .back-btn {
@@ -298,7 +312,6 @@
       cursor: pointer;
       margin-bottom: 20px;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(24, 43, 72, 0.2);
     }
 
     .back-btn:hover {
@@ -319,7 +332,6 @@
       border-radius: 16px;
       padding: 22px;
       box-shadow: var(--shadow);
-      position: relative;
     }
 
     .list-item-title {
@@ -327,21 +339,11 @@
       font-size: 1.3em;
       font-weight: bold;
     }
-
-    footer {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.85em;
-      color: var(--text-muted);
-      margin-top: auto;
-    }
   </style>
 </head>
 <body>
 
-  <!-- خلفية نمط ضربات الفرشاة الفنية برمجياً -->
+  <!-- خلفية ضربات الفرشاة الفنية -->
   <div class="brush-strokes-bg"></div>
 
   <header>
@@ -360,7 +362,7 @@
 
   <main>
 
-    <!-- 1. الرئيسية -->
+    <!-- 1. الصفحة الرئيسية -->
     <div id="section-home" class="page-section active">
       <div class="banner-title">
         <div data-i18n="bannerTitle">
@@ -368,20 +370,50 @@
         </div>
       </div>
 
-      <div class="nav-buttons-grid">
-        <div class="nav-card-btn" onclick="showSection('section-biography')">
+      <!-- مربعات التنقل الرئيسية -->
+      <div class="nav-squares-grid">
+        <div class="square-card-btn" onclick="showSection('section-biography')">
           <h3 data-i18n="bioBtnTitle">سيرتها العطرة</h3>
-          <p style="font-size: 0.92em; color: var(--text-muted);" data-i18n="bioBtnDesc">قراءة السيرة المباركة والمصادر التاريخية</p>
+          <p style="font-size: 0.88em; color: var(--text-muted);" data-i18n="bioBtnDesc">قراءة السيرة المباركة والمصادر</p>
         </div>
 
-        <div class="nav-card-btn" onclick="showSection('section-info-list')">
+        <div class="square-card-btn" onclick="showSection('section-info-list')">
           <h3 data-i18n="infoBtnTitle">معلومات عنها</h3>
-          <p style="font-size: 0.92em; color: var(--text-muted);" data-i18n="infoBtnDesc">تصفح الألقاب والتحديث التفاعلي للمعلومات</p>
+          <p style="font-size: 0.88em; color: var(--text-muted);" data-i18n="infoBtnDesc">تصفح كافة الألقاب والحقائق</p>
         </div>
       </div>
+
+      <br>
+
+      <!-- معلومة متجددة تفاعلية في الصفحة الرئيسية -->
+      <div class="info-quick-card">
+        <div class="info-header">
+          <h4><span data-i18n="quickInfoTitle">معلومة متجددة</span></h4>
+          <button class="btn-refresh" onclick="nextRandomInfo()">
+            <span data-i18n="refreshBtn">تحديث المعلومة</span>
+          </button>
+        </div>
+        <div id="quick-info-title" class="info-content-title">العقيلة</div>
+        <div id="quick-info-desc">لُقِّبت بالعقيلة؛ لأن العقيلة تعني المرأة الكريمة النفيسة العزيزة في قومها.</div>
+        <div id="quick-info-source" class="info-source">المصدر: زينب الكبرى، الشيخ جعفر النقدي، ص ١٧.</div>
+      </div>
+
+      <br>
+
+      <!-- جزء مختصر من السيرة مع ثلاث نقاط وزر انتقال -->
+      <div class="info-quick-card">
+        <h3 style="color: var(--primary-brown); margin-bottom: 12px;" data-i18n="bioSnippetTitle">من سيرتها المباركة</h3>
+        <p id="bio-snippet-text" style="color: var(--text-main); text-align: justify; line-height: 1.8;">
+          السيدة زينب الكبرى (عليها السلام) هي ابنة الإمام علي بن أبي طالب والسيدة فاطمة الزهراء (عليهما السلام)، وحفيدة رسول الله محمد (صلى الله عليه وآله). نشأت في بيت النبوة والإمامة، وتربّت على الإيمان والعلم والصبر...
+        </p>
+        <button class="read-more-btn" onclick="showSection('section-biography')">
+          <span data-i18n="readMoreBtn">اضغط للقراءة</span>
+        </button>
+      </div>
+
     </div>
 
-    <!-- 2. السيرة -->
+    <!-- 2. صفحة السيرة الكاملة -->
     <div id="section-biography" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -397,21 +429,9 @@
       </div>
     </div>
 
-    <!-- 3. المعلومات -->
+    <!-- 3. صفحة كافة المعلومات والألقاب -->
     <div id="section-info-list" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
-      
-      <div class="info-quick-card" style="margin-bottom: 30px;">
-        <div class="info-header">
-          <h4><span data-i18n="quickInfoTitle">معلومة متجددة</span></h4>
-          <button class="btn-refresh" onclick="nextRandomInfo()">
-            <span data-i18n="refreshBtn">تحديث المعلومة</span>
-          </button>
-        </div>
-        <div id="quick-info-title" class="info-content-title">العقيلة</div>
-        <div id="quick-info-desc">لُقِّبت بالعقيلة؛ لأن العقيلة تعني المرأة الكريمة النفيسة العزيزة في قومها.</div>
-        <div id="quick-info-source" class="info-source">المصدر: زينب الكبرى، الشيخ جعفر النقدي، ص ١٧.</div>
-      </div>
 
       <h3 style="color: var(--primary-brown); margin-bottom: 18px;" data-i18n="infoListFullTitle">كافة ألقاب ومعلومات السيدة زينب (عليها السلام)</h3>
       
@@ -504,6 +524,7 @@
       renderBiography();
       renderQuickInfo();
       renderFullInfoList();
+      renderBioSnippet();
     }
 
     function showSection(sectionId) {
@@ -523,6 +544,12 @@
 
       pContainer.innerHTML = pData.map(p => `<p>${p}</p>`).join('');
       sContainer.innerHTML = sData.map(s => `<li>${s}</li>`).join('');
+    }
+
+    function renderBioSnippet() {
+      const pData = database[currentLang].bioParagraphs[0];
+      const snippet = pData.substring(0, 180) + '...';
+      document.getElementById('bio-snippet-text').innerText = snippet;
     }
 
     function nextRandomInfo() {
@@ -592,29 +619,33 @@
         if (currentLang === 'en') {
           if (key === 'appTitle') el.innerText = "Lady Zaynab (p)";
           if (key === 'bannerTitle') el.innerText = "Congratulations on the Birth of Lady Zaynab al-Kubra (p)";
-          if (key === 'bioBtnTitle') el.innerText = "Her Blessed Biography";
-          if (key === 'bioBtnDesc') el.innerText = "Read her full history and sources";
-          if (key === 'infoBtnTitle') el.innerText = "Information About Her";
-          if (key === 'infoBtnDesc') el.innerText = "Browse titles and interactive facts";
+          if (key === 'bioBtnTitle') el.innerText = "Her Biography";
+          if (key === 'bioBtnDesc') el.innerText = "Read full history & sources";
+          if (key === 'infoBtnTitle') el.innerText = "Information";
+          if (key === 'infoBtnDesc') el.innerText = "Browse all titles & facts";
           if (key === 'quickInfoTitle') el.innerText = "Interactive Fact";
           if (key === 'refreshBtn') el.innerText = "Refresh Fact";
-          if (key === 'backHome') el.innerText = "Back to Main Page";
+          if (key === 'backHome') el.innerText = "Back to Home";
           if (key === 'bioFullTitle') el.innerText = "Biography of Lady Zaynab (peace be upon her)";
           if (key === 'infoListFullTitle') el.innerText = "All Titles & Information of Lady Zaynab (p)";
           if (key === 'sourcesTitle') el.innerText = "Historical Sources:";
+          if (key === 'bioSnippetTitle') el.innerText = "From Her Blessed Biography";
+          if (key === 'readMoreBtn') el.innerText = "Click to Read";
         } else {
           if (key === 'appTitle') el.innerText = "السيدة زينب (ع)";
           if (key === 'bannerTitle') el.innerText = "مباركين بولادة السيدة زينب الكبرى (عليها السلام)";
           if (key === 'bioBtnTitle') el.innerText = "سيرتها العطرة";
-          if (key === 'bioBtnDesc') el.innerText = "قراءة السيرة المباركة والمصادر التاريخية";
+          if (key === 'bioBtnDesc') el.innerText = "قراءة السيرة المباركة والمصادر";
           if (key === 'infoBtnTitle') el.innerText = "معلومات عنها";
-          if (key === 'infoBtnDesc') el.innerText = "تصفح الألقاب والتحديث التفاعلي للمعلومات";
+          if (key === 'infoBtnDesc') el.innerText = "تصفح كافة الألقاب والحقائق";
           if (key === 'quickInfoTitle') el.innerText = "معلومة متجددة";
           if (key === 'refreshBtn') el.innerText = "تحديث المعلومة";
           if (key === 'backHome') el.innerText = "العودة للرئيسية";
           if (key === 'bioFullTitle') el.innerText = "السيرة العطرة للسيدة زينب الكبرى (عليها السلام)";
           if (key === 'infoListFullTitle') el.innerText = "كافة ألقاب ومعلومات السيدة زينب (عليها السلام)";
           if (key === 'sourcesTitle') el.innerText = "المصادر التاريخية:";
+          if (key === 'bioSnippetTitle') el.innerText = "من سيرتها المباركة";
+          if (key === 'readMoreBtn') el.innerText = "اضغط للقراءة";
         }
       });
     }
