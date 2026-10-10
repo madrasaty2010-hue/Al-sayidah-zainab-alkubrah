@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مباركين بولادة السيدة زينب الكبرى (عليها السلام)</title>
   
-  <!-- خط رقاعي يدوي أصيل -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #f2ebe4;           /* بني فاتح دافئ */
-      --card-bg: #ffffff;           /* أبيض نقّي */
-      --text-main: #121212;         /* أسود متوازن للنصوص */
-      --text-muted: #3a2b22;       /* بني غامق */
-      --primary-brown: #5c3217;     /* بني دافئ رئيسي */
-      --primary-navy: #132238;      /* نيلي كحلي رئيسي */
-      --border-color: #8c5d3b;      /* بني حدودي */
+      --bg-color: #f2ebe4;
+      --card-bg: #ffffff;
+      --text-main: #121212;
+      --text-muted: #3a2b22;
+      --primary-brown: #5c3217;
+      --primary-navy: #132238;
+      --border-color: #8c5d3b;
       --shadow: 0 8px 20px rgba(19, 34, 56, 0.12);
       --font-hand: 'Aref Ruqaa', serif;
       --font-scale: 1;
@@ -26,12 +25,12 @@
     }
 
     [data-theme="dark"] {
-      --bg-color: #0b131e;         /* نيلي داكن */
-      --card-bg: #132238;         /* نيلي للبطاقات */
-      --text-main: #ffffff;       /* أبيض */
-      --text-muted: #d8c4b6;     /* بني فاتح */
-      --primary-brown: #aa683a;   /* بني ناعم */
-      --primary-navy: #386299;    /* نيلي فاتح */
+      --bg-color: #0b131e;
+      --card-bg: #132238;
+      --text-main: #ffffff;
+      --text-muted: #d8c4b6;
+      --primary-brown: #aa683a;
+      --primary-navy: #386299;
       --border-color: #aa683a;
       --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       --pattern-opacity: 0.35;
@@ -57,13 +56,10 @@
       overflow-x: hidden;
     }
 
-    /* خلفية النقشة الثابتة والدائمة لجميع الأجهزة */
     #global-pattern-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
       background-repeat: no-repeat;
@@ -321,7 +317,6 @@
 </head>
 <body>
 
-  <!-- خلفية النقشة الثابتة -->
   <div id="global-pattern-bg"></div>
 
   <header>
@@ -340,7 +335,7 @@
 
   <main>
 
-    <!-- 1. الصفحة الرئيسية -->
+    <!-- 1. الرئيسية -->
     <div id="section-home" class="page-section active">
       <div class="banner-title">
         <div class="pattern-overlay-layer custom-pattern"></div>
@@ -354,7 +349,6 @@
       <div class="image-container-card">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative dynamic-image-wrapper">
-          <!-- صورة الواجهة المباشرة -->
           <img id="main-display-image" src="" alt="ولادة السيدة زينب الكبرى">
         </div>
       </div>
@@ -380,7 +374,7 @@
       </div>
     </div>
 
-    <!-- 2. صفحة السيرة العطرة -->
+    <!-- 2. السيرة -->
     <div id="section-biography" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -399,7 +393,7 @@
       </div>
     </div>
 
-    <!-- 3. صفحة معلومات عنها والمعلومة المتجددة -->
+    <!-- 3. المعلومات -->
     <div id="section-info-list" class="page-section">
       <button class="back-btn" onclick="showSection('section-home')"><span data-i18n="backHome">العودة للرئيسية</span></button>
       
@@ -507,9 +501,11 @@
     });
 
     function applyFixedImages() {
-      // روابط مباشرة سحابية تضمن فتح الصورتين على جميع الأجهزة وبدون مشاكل في GitHub Pages
-      const mainImgUrl = "https://i.ibb.co/3kM2wpx/story-image.jpg"; 
-      const patternImgUrl = "https://i.ibb.co/L5gqL2Y/pattern-bg.jpg"; 
+      // ضع هنا اسم ملف صورة الواجهة (الصورة الأولى) تماماً كما سميتها في مجلد الكود لديك، مثلاً: "image_2.png"
+      const mainImgUrl = "image_2.png"; 
+      
+      // ضع هنا اسم ملف صورة النقشة (الصورة الثانية) تماماً كما سميتها في مجلد الكود لديك، مثلاً: "image_3.png"
+      const patternImgUrl = "image_3.png"; 
 
       document.getElementById('main-display-image').src = mainImgUrl;
       document.getElementById('global-pattern-bg').style.backgroundImage = `url('${patternImgUrl}')`;
