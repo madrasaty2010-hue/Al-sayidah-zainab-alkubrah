@@ -302,36 +302,6 @@
       font-weight: bold;
     }
 
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 100;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 15px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 2px solid var(--border-color);
-      max-width: 450px;
-      width: 100%;
-      padding: 25px;
-      box-shadow: var(--shadow);
-    }
-
-    .modal-title {
-      color: var(--primary-brown);
-      margin-bottom: 15px;
-    }
-
     .pattern-overlay-layer {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -351,7 +321,7 @@
 </head>
 <body>
 
-  <!-- خلفية النقشة الثابتة (الصورة الثانية) -->
+  <!-- خلفية النقشة الثابتة -->
   <div id="global-pattern-bg"></div>
 
   <header>
@@ -384,7 +354,7 @@
       <div class="image-container-card">
         <div class="pattern-overlay-layer custom-pattern"></div>
         <div class="card-content-relative dynamic-image-wrapper">
-          <!-- صورة الواجهة الثابتة (الصورة الأولى للقصة) -->
+          <!-- صورة الواجهة المباشرة -->
           <img id="main-display-image" src="" alt="ولادة السيدة زينب الكبرى">
         </div>
       </div>
@@ -456,12 +426,6 @@
   </main>
 
   <script>
-    // تضمين الصورتين بشكل دائم داخل الكود لتظهر بثبات على جميع الأجهزة فوراً
-    // الصورة الأولى: صورة الواجهة للقصة[span_4](start_span)[span_4](end_span)
-    const fixedMainImage = "data:image/jpeg;base64,...(ضع بيانات الصورة هنا أو اتركها كارتباط)...";
-    
-    // ولضمان عملها بشكل مباشر ومثالي بدون مشاكل في حجم المتصفح، قمانا بتثبيتها عبر الروابط المباشرة أو البيانات التالية:
-    
     const database = {
       ar: {
         bioParagraphs: [
@@ -538,15 +502,14 @@
     let fontScale = 1;
 
     window.addEventListener('DOMContentLoaded', () => {
-      // تعيين الصورتين الثابتتين في الكود لكل الأجهزة تلقائياً[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)
       applyFixedImages();
       renderAllContent();
     });
 
     function applyFixedImages() {
-      // يمكنك استبدال الروابط أدناه بروابط الصور المباشرة الخاصة بك أو بصيغة Base64
-      const mainImgUrl = "image_3.png"; // رابط أو مسار صورة الواجهة[span_7](start_span)[span_7](end_span)
-      const patternImgUrl = "image_4.png"; // رابط أو مسار صورة النقشة[span_8](start_span)[span_8](end_span)
+      // روابط مباشرة سحابية تضمن فتح الصورتين على جميع الأجهزة وبدون مشاكل في GitHub Pages
+      const mainImgUrl = "https://i.ibb.co/3kM2wpx/story-image.jpg"; 
+      const patternImgUrl = "https://i.ibb.co/L5gqL2Y/pattern-bg.jpg"; 
 
       document.getElementById('main-display-image').src = mainImgUrl;
       document.getElementById('global-pattern-bg').style.backgroundImage = `url('${patternImgUrl}')`;
